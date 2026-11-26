@@ -48,3 +48,10 @@ is not a multiple of 8. Many encoders in the wild omit padding; if you need to
 accept that, strip the input to a multiple of 8 before calling `decode`, and
 remember that you are then choosing to accept ambiguous input. This library
 will not make that choice for you.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
